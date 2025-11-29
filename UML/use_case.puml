@@ -1,0 +1,48 @@
+@startuml
+left to right direction
+
+package "BBP" {
+    usecase (Public Paths\nVisualization) as UC1
+    
+    package "User Management" {
+        usecase (User Registration) as UC2
+        usecase (User Login) as UC3
+        usecase (Profile Modification) as UC4
+        usecase (Settings Modification) as UC5
+        usecase (Profile Elimination) as UC6
+    }
+
+    package "Own Trips Management" {
+        usecase (Personal Trips\nVisualization) as UC7
+        usecase (Trip Modification) as UC8
+        usecase (Manual Trip Insertion) as UC9
+        usecase (Automatic Trip\nRecording) as UC10
+        usecase (Real-Time Trip\nRecording) as UC11
+        usecase (Path Publication) as UC12
+    }
+    
+}
+
+note "Every use case is initiated by\nthe User, Unregistered User or\nRegistered User actors" as N1
+
+actor :User: as U
+actor :Unregistered\n      User: as UU
+actor :Registered\n     User: as RU
+
+U<|--UU
+U<|--RU
+
+U --> UC1
+UU --> UC2
+RU --> UC3
+RU --> UC4
+RU --> UC5
+RU --> UC6
+RU --> UC7
+RU --> UC8
+RU --> UC9
+RU --> UC10
+RU --> UC11
+RU --> UC12
+
+@enduml
