@@ -1,0 +1,28 @@
+@startuml
+
+|User|
+:Open BBP platform;
+:Navigate to login page;
+
+repeat
+    repeat
+        group Login fields insertion{
+            :Insert email;
+            :Insert password;
+        }
+        :Submit login form;
+
+        |BBP|
+        :Verify credentials;
+        backward :Error message;
+    repeat while (Email associated with\nexisting account?) is (no) not (yes)
+    backward :Error message;
+repeat while (Password matches?) is (no) not (yes)
+
+:Display home page;
+
+|User|
+:User successfully authenticated;
+stop
+
+@enduml

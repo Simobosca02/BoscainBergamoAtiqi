@@ -1,0 +1,30 @@
+@startuml
+
+|Registered User|
+:Open Profile section;
+:Select "Edit profile";
+
+repeat
+    :Modify profile fields;
+    
+    if(Cancel operation?) then (yes)
+        stop
+    else (no)
+    endif
+
+    :Submit changes;
+
+    |BBP|
+    :Validate changes;
+    backward :Error message;
+repeat while (Field valid?) is (no) not (yes)
+
+:Save changes;
+:Display updated profile;
+
+|Registered User|
+:Profile successfully updated;
+
+stop
+
+@enduml

@@ -1,0 +1,45 @@
+@startuml
+
+|User|
+
+start
+:Open "Search Path" interface;
+
+repeat
+
+    :Select origin point;
+    :Select destination point;
+    :Submit choice;
+
+    |BBP|
+
+    :Search published paths;
+
+    if (Any paths found?) then (yes)
+
+        :Order paths by score;
+        :Display path to user;
+
+        repeat
+            |User|
+            :Select a path;
+
+            |BBP|
+            :Mark on the map;
+            :Provide path details;
+        repeat while (User select another path?) is (yes) not (no)
+
+    else (no)
+
+        |BBP|
+        :Notify user "No paths found";
+
+    endif
+
+repeat while (User wants to insert others\norigin and destination points?) is (yes) not (no)
+
+|User|
+:Leave interface;
+stop
+
+@enduml

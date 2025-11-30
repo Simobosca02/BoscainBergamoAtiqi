@@ -1,0 +1,40 @@
+@startuml
+
+|Unregistered User|
+
+start
+:Open BBP platform;
+:Navigate to registration page;
+
+repeat
+    repeat
+
+        group Registration fields insertion{
+            :Insert email;
+            :Insert username;
+            :Insert password;
+        }
+            :Submit registration form;
+
+    |BBP|
+
+    backward :Error message;
+    repeat while (Fields valid?) is (no) not (yes)
+backward :Error message;
+repeat while (Email or username already used?) is (yes) not (no)
+
+:Create account;
+:Ask if user wants to grant\naccess to GPS data;
+
+|Unregistered User|
+if(Grant access to GPS data?) then (yes)
+else (no)
+endif
+
+|BBP|
+:Store user preferences;
+:Display home page;
+
+stop
+
+@enduml
