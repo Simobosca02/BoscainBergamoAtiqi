@@ -1,0 +1,36 @@
+@startuml
+
+|Registered User|
+start
+:Open Profile section;
+
+repeat
+    repeat
+        repeat
+            :Select a setting;
+            :Modify setting value;
+            
+            if(Cancel operation?) then (yes)
+                stop
+            else (no)
+            endif
+
+            :Submit changes;
+
+            |BBP|
+            :Validate changes;
+            backward :Error message;
+        repeat while (Field valid?) is (no) not (yes)
+        backward :Error message;
+    repeat while (Have the right device permissions?) is (no) not (yes)
+
+:Save changes;
+:Display updated settings;
+repeat while (User wants to modify other settings?) is (yes) not (no)
+
+|Registered User|
+:Settings successfully updated;
+
+stop
+
+@enduml

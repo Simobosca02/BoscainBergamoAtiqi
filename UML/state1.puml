@@ -1,0 +1,44 @@
+TRIP LIFECYCLE
+
+@startuml
+skinparam state {
+  BackgroundColor #F8F8F8
+  BorderColor #333333
+  FontSize 14
+}
+
+[*] --> Idle : start
+
+state Idle {
+}
+
+
+Idle --> Recording : start rec\n(Auto/Semi-Auto)
+
+Recording --> Paused : user pause
+Paused --> Recording : resume rec
+
+Recording --> Reviewing : end rec
+Paused --> Reviewing : end rec from pause
+
+
+Idle --> ManualEntry : manual mode
+
+state ManualEntry {
+}
+ManualEntry --> Saved: confirm
+ManualEntry --> Idle : cancel
+
+
+state Reviewing {
+}
+Reviewing --> Saved : confirm automatic data
+Reviewing --> Recording : resum auto mode
+Reviewing --> Idle : cancel trip
+
+
+Saved --> Published : pubblica
+
+Saved --> Idle : delete
+Published --> Idle : delete
+@enduml

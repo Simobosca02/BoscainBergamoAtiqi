@@ -1,0 +1,29 @@
+FEEDBACK LIFECYCLE
+
+@startuml
+title Path Status & Feedback Merging (State Machine)
+
+[*] --> Unknown : No feedback available
+
+state Unknown {
+}
+Unknown --> Optimal : Recent majority positive feedbacks
+Unknown --> Warning : Mixed feedbacks OR insufficient consensus
+Unknown --> RequiresMaintenance : Recent majority negative feedbacks
+
+state Optimal {
+}
+Optimal --> Warning : Mixed feedbacks OR insufficient recent positives
+Optimal --> RequiresMaintenance : Recent majority negative feedbacks
+
+state Warning {
+}
+Warning --> Optimal : Recent majority positive feedbacks
+Warning --> RequiresMaintenance : Recent majority negative feedbacks
+
+state RequiresMaintenance {
+}
+RequiresMaintenance --> Warning : mixed feedbacks OR old negative data
+RequiresMaintenance --> Optimal : Recent several positive feedbacks
+
+@enduml

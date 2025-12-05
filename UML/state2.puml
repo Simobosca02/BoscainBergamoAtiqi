@@ -1,0 +1,25 @@
+USER LIFECYCLE
+
+@startuml
+title User Account Lifecycle
+
+[*] --> Guest: Open app
+
+state Guest{
+}
+
+Guest --> Guest: Create account
+Guest --> Active: Log in
+
+state Active {
+}
+
+[*] --> Active: Open app
+Active --> Deleted : Cancel account and mantain trips anonymous
+Active --> Active : modify profile
+
+state Deleted {
+}
+
+Deleted --> Guest : User status return\n to guest
+@enduml

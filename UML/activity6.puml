@@ -1,0 +1,30 @@
+@startuml
+
+|Registered User|
+start
+:Open Profile section;
+repeat
+    repeat
+        :Select "Delete account";
+
+        |BBP|
+        :Require password for confirmation;
+
+        |Registered User|
+    repeat while (Cancel operation?) not (no)
+    :Insert password;
+
+    |BBP|
+    :Validate password;
+    backward :Error message;
+repeat while (Password matches?) is (no) not (yes)
+
+group Delete Account{
+    :Remove own trips;
+    :Remove profile data;
+}
+
+:Visualize public home page;
+stop
+
+@enduml
